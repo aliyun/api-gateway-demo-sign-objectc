@@ -416,7 +416,7 @@
         bool isFirst = true;
         for(id key in queryParams){
             if(!isFirst){
-                [result appendString:@","];
+                [result appendString:@"&"];
             }
             else{
                 [result appendString:@"?"];
