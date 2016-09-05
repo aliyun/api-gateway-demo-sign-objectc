@@ -365,7 +365,10 @@
             if(isFirst != true){
                 [formString appendString:@"&"];
             }
-            isFirst = false;
+            else{
+                isFirst = false;
+            }
+            
             [formString appendFormat:@"%@=%@" , key , [formParams objectForKey:key]];
         }
         
@@ -417,8 +420,9 @@
             }
             else{
                 [result appendString:@"?"];
+                isFirst = false;
             }
-            isFirst = false;
+            
             [result appendFormat:@"%@=%@", key , [[queryParams objectForKey:key] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
         }
     }
@@ -435,10 +439,10 @@
                     pathParams: (NSDictionary *) pathParams{
     
     NSMutableString * result = [[NSMutableString alloc] initWithString: path];
-    [pathParams enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        NSString * safeString = ([obj isKindOfClass:[NSString class]]) ? obj : [NSString stringWithFormat:@"%@", obj];
-        [result replaceCharactersInRange:[result rangeOfString:[NSString stringWithFormat:@"[%@]", key]] withString:safeString];
-    }];
+    for(id key in pathParams){
+        NSString * value = [pathParams objectForKey:key];
+        [result replaceCharactersInRange:[result rangeOfString:[NSString stringWithFormat:@"[%@]", key]] withString:value];
+    }
     
     return result;
 

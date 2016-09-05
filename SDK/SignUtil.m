@@ -108,7 +108,10 @@
                 if(!isFirst){
                     [signHeaders appendString:@","];
                 }
-                isFirst = false;
+                else{
+                    isFirst = false;
+                }
+                
                 
                 [signHeaders appendString:key];
                 [signHeaderNames addObject:key];
