@@ -22,6 +22,9 @@ static NSString* const CLOUDAPI_X_CA_SIGNATURE_HEADERS = @"X-Ca-Signature-Header
 //请求时间戳
 static NSString* const CLOUDAPI_X_CA_TIMESTAMP =  @"X-Ca-Timestamp";
 
+//请求放重放Nonce,15分钟内保持唯一,建议使用UUID
+static NSString* const CLOUDAPI_X_CA_NONCE = @"X-Ca-Nonce";
+
 //APP KEY
 static NSString* const CLOUDAPI_X_CA_KEY = @"X-Ca-Key";
 

@@ -122,7 +122,13 @@
         
     }
     
-    for(int i = (int)([signHeaderNames count]-1) ; i > -1  ; i--){
+    //加入签名的头需要按照头的字母排序
+    [signHeaderNames sortUsingComparator:^NSComparisonResult(__strong id obj1,__strong id obj2){
+        NSString *str1=(NSString *)obj1;
+        NSString *str2=(NSString *)obj2;
+        return [str1 compare:str2];
+    }];
+    for(int i = 0 ; i < (int)[signHeaderNames count]  ; i++){
         [result appendFormat:@"%@:%@%c" , [signHeaderNames objectAtIndex:i] , [headers objectForKey:[signHeaderNames objectAtIndex:i]] , CLOUDAPI_LF];
     }
     

@@ -335,6 +335,9 @@
     NSTimeInterval timeStamp = [[NSDate date] timeIntervalSince1970] * 1000;
     [headerParams setObject:[NSString stringWithFormat:@"%0.0lf", timeStamp] forKey:CLOUDAPI_X_CA_TIMESTAMP];
     
+    //请求放重放Nonce,15分钟内保持唯一,建议使用UUID
+    [headerParams setObject:[[NSUUID UUID] UUIDString] forKey:CLOUDAPI_X_CA_NONCE];
+
     //设置请求头中的UserAgent
     [headerParams setObject:CLOUDAPI_USER_AGENT forKey:CLOUDAPI_HTTP_HEADER_USER_AGENT];
     
