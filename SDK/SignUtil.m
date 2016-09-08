@@ -183,19 +183,6 @@
     return result;
 }
 
-//+ NSComparisonResult compare:(NSString *) str1
-//                            str2:(NSString *) str2
-//{
-//    const char *str1Char  = [str1 cStringUsingEncoding:NSUTF8StringEncoding];
-//    const char *str2Char  = [str2 cStringUsingEncoding:NSUTF8StringEncoding];
-//    
-//    for(int i = 0 ; i < strlen(str1Char) ; i++){
-//        if(i >= strlen(str1Char)){
-//            return NSOrderedDescending;
-//        }
-//        if(str1Char[i])
-//    }
-//}
 
 /**
  *  对字符串进行hmacSha256加密，然后再进行BASE64编码

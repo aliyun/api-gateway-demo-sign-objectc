@@ -243,9 +243,9 @@
                    headerParams:(NSMutableDictionary*) headerParams;
 
 /**
- *  拼接Qeurystring
+ *  拼接参数串
  */
-+(NSString *) combineParams:(NSDictionary *) params;
++(NSString *) buildParamsString:(NSDictionary *) params;
 
 /**
  *  将path中的参数用pathParams中的值替换

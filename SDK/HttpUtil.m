@@ -310,7 +310,7 @@
      * 替换后path会变成/v2/getUserInfo/10000003
      */
     NSString * pathWithParam = [HttpUtil combinePathParam: path pathParams:pathParams];
-    NSString * queryString = [HttpUtil combineParams:queryParams];
+    NSString * queryString = [HttpUtil buildParamsString:queryParams];
     /**
      *  拼接URL
      *  HTTP + HOST + PATH(With pathparameter) + Query Parameter
@@ -369,7 +369,7 @@
      *  将Form中的内容拼接成字符串后使用UTF8编码序列化成Byte数组后加入到Request中去
      */
     if(nil != formParams){
-        [request setHTTPBody: [[HttpUtil combineParams:formParams] dataUsingEncoding:NSUTF8StringEncoding]];
+        [request setHTTPBody: [[HttpUtil buildParamsString:formParams] dataUsingEncoding:NSUTF8StringEncoding]];
     }
 
     /**
@@ -423,11 +423,11 @@
 }
 
 /**
- * 将pathParams中的value替换掉path中的动态参数
- * 比如 path=/v2/getUserInfo/[userId]，pathParams 字典中包含 key:userId , value:10000003
- * 替换后path会变成/v2/getUserInfo/10000003
+ * 将Parameter中的value生成String：
+ * abc=123&edf=456
+ * 参数值都需要做URLEncode处理
  */
-+(NSString *) combineParams:(NSDictionary *) params{
++(NSString *) buildParamsString:(NSDictionary *) params{
     NSMutableString * result = [[NSMutableString alloc] init];
     if(nil != params){
         bool isFirst = true;
