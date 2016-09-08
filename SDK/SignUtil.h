@@ -21,7 +21,7 @@
 #import <CommonCrypto/CommonHMAC.h>
 #import "AppInclude.h"
 
-
+static NSString* count  = @"TEST";
 
 /**
  *
@@ -43,7 +43,7 @@
            headers:(NSDictionary *) headers
               path:(NSString *) path
         queryParam:(NSDictionary *) queryParam
-         formParam:(NSString *) formParam;
+         formParam:(NSDictionary *) formParam;
 
 @end
 
@@ -55,7 +55,7 @@
 +(NSString *) buildStringToSign:(NSDictionary *) headers
                            path:(NSString *) path
                      queryParam:(NSDictionary *) queryParam
-                      formParam:(NSString *) formParam
+                      formParam:(NSDictionary *) formParam
                          method:(NSString *) method;
 
 /**
@@ -67,7 +67,7 @@
 /**
  * 将path、queryParam、formParam合成一个字符串
  */
-+(NSString *) buildResource:(NSString *) path queryParam:(NSDictionary *) queryParam formParam:(NSString *) formParam;
++(NSString *) buildResource:(NSString *) path queryParam:(NSDictionary *) queryParam formParam:(NSDictionary *) formParam;
 
 
 /**

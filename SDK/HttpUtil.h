@@ -243,12 +243,9 @@
                    headerParams:(NSMutableDictionary*) headerParams;
 
 /**
- *  生成url
+ *  拼接Qeurystring
  */
-+(NSString *) buildUrl:protocol
-                  host:(NSString *) host
-                  path:(NSString *) path
-           queryParams:(NSDictionary*) queryParams;
++(NSString *) combineParams:(NSDictionary *) params;
 
 /**
  *  将path中的参数用pathParams中的值替换

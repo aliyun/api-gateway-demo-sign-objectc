@@ -29,7 +29,7 @@
            headers:(NSMutableDictionary *) headers
               path:(NSString *) path
         queryParam:(NSDictionary *) queryParam
-         formParam:(NSString *) formParam{
+         formParam:(NSDictionary *) formParam{
     
     //将Request中的httpMethod、headers、path、queryParam、formParam合成一个字符串
     NSString * data = [SignUtil buildStringToSign: headers path:path queryParam:queryParam formParam:formParam method:httpMethod];
@@ -49,7 +49,7 @@
 +(NSString *) buildStringToSign:(NSMutableDictionary *) headers
                            path:(NSString *) path
                      queryParam:(NSDictionary *) queryParam
-                      formParam:(NSString *) formParam
+                      formParam:(NSDictionary *) formParam
                          method:(NSString *) method{
     
     NSMutableString * result = [[NSMutableString alloc] initWithFormat:@"%@%c" , method , CLOUDAPI_LF];
@@ -139,33 +139,63 @@
 /**
  * 将path、queryParam、formParam合成一个字符串
  */
-+(NSString *) buildResource:(NSString *) path queryParam:(NSDictionary *) queryParam formParam:(NSString *) formParam{
++(NSString *) buildResource:(NSString *) path queryParam:(NSDictionary *) queryParam formParam:(NSDictionary *) formParam
+{
+
+    NSMutableDictionary * parameters = [[NSMutableDictionary alloc] init];
+    
+    
+    if(nil != queryParam && queryParam.count > 0){
+        [parameters addEntriesFromDictionary:queryParam];
+    }
+    
+    if(nil != formParam && formParam.count > 0){
+        [parameters addEntriesFromDictionary:formParam];
+    }
+    
+    NSArray * keys = [parameters allKeys];
+    NSArray * sortedKeys = [keys sortedArrayUsingComparator:^NSComparisonResult(__strong id obj1,__strong id obj2){
+        NSString *str1=(NSString *)obj1;
+        NSString *str2=(NSString *)obj2;
+        return [str1 compare:str2];
+    }];
+
+    
     NSMutableString * result = [[NSMutableString alloc] initWithString:path];
     
-    if(nil != queryParam || nil != formParam){
+    if(parameters.count > 0){
         [result appendString:@"?"];
-    }
-    bool hasForm = false;
-    
-    if(nil != formParam && [formParam length] > 0){
-        [result appendString:formParam];
-        hasForm = true;
-    }
-    
-    if(nil != queryParam){
         bool isFirst = true;
-        for(id key in queryParam){
-            if(isFirst != true || hasForm == true){
+        for(int i = 0 ; i < sortedKeys.count ; i++){
+            if(!isFirst){
                 [result appendString:@"&"];
             }
-            
-            isFirst = false;
-            [result appendFormat:@"%@=%@" , key , [queryParam objectForKey:key]];
+            else{
+                isFirst = false;
+            }
+            id key = [sortedKeys objectAtIndex:i];
+            [result appendFormat:@"%@=%@" , key , [parameters objectForKey:key]];
+        
         }
+
     }
     
     return result;
 }
+
+//+ NSComparisonResult compare:(NSString *) str1
+//                            str2:(NSString *) str2
+//{
+//    const char *str1Char  = [str1 cStringUsingEncoding:NSUTF8StringEncoding];
+//    const char *str2Char  = [str2 cStringUsingEncoding:NSUTF8StringEncoding];
+//    
+//    for(int i = 0 ; i < strlen(str1Char) ; i++){
+//        if(i >= strlen(str1Char)){
+//            return NSOrderedDescending;
+//        }
+//        if(str1Char[i])
+//    }
+//}
 
 /**
  *  对字符串进行hmacSha256加密，然后再进行BASE64编码

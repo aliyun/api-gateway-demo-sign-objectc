@@ -310,12 +310,19 @@
      * 替换后path会变成/v2/getUserInfo/10000003
      */
     NSString * pathWithParam = [HttpUtil combinePathParam: path pathParams:pathParams];
-    
+    NSString * queryString = [HttpUtil combineParams:queryParams];
     /**
      *  拼接URL
      *  HTTP + HOST + PATH(With pathparameter) + Query Parameter
      */
-    NSString *url = [HttpUtil buildUrl: CLOUDAPI_HTTP  host:host path:pathWithParam queryParams:queryParams];
+    NSMutableString *url = [[NSMutableString alloc] initWithFormat:@"%@%@%@" , protocol , host , pathWithParam];
+    if(nil != queryParams && queryParams.count > 0){
+        [url appendFormat:@"?%@" , queryString];
+    }
+
+    if(nil == headerParams){
+        headerParams = [[NSMutableDictionary alloc] init];
+    }
     
     /**
      *  使用URL初始化一个NSMutableURLRequest类
@@ -361,21 +368,8 @@
      *  如果formParams不为空
      *  将Form中的内容拼接成字符串后使用UTF8编码序列化成Byte数组后加入到Request中去
      */
-     NSMutableString *formString = [[NSMutableString alloc] init];
     if(nil != formParams){
-        bool isFirst = true;
-        for(id key in formParams){
-            if(isFirst != true){
-                [formString appendString:@"&"];
-            }
-            else{
-                isFirst = false;
-            }
-            
-            [formString appendFormat:@"%@=%@" , key , [formParams objectForKey:key]];
-        }
-        
-        [request setHTTPBody: [formString dataUsingEncoding:NSUTF8StringEncoding]];
+        [request setHTTPBody: [[HttpUtil combineParams:formParams] dataUsingEncoding:NSUTF8StringEncoding]];
     }
 
     /**
@@ -393,7 +387,7 @@
      *  将Request中的httpMethod、headers、path、queryParam、formParam合成一个字符串用hmacSha256算法双向加密进行签名
      *  签名内容放到Http头中，用作服务器校验
      */
-    [headerParams setObject:[SignUtil sign:method headers:headerParams path:pathWithParam queryParam:queryParams formParam:formString] forKey:CLOUDAPI_X_CA_SIGNATURE];
+    [headerParams setObject:[SignUtil sign:method headers:headerParams path:pathWithParam queryParam:queryParams formParam:formParams] forKey:CLOUDAPI_X_CA_SIGNATURE];
 
     /**
      *  凑齐所有HTTP头之后，将头中的数据全部放入Request对象中
@@ -408,30 +402,7 @@
     
 }
 
-/**
- *  拼接URL
- *  HTTP + HOST + PATH(With pathparameter) + Query Parameter
- */
-+(NSString *) buildUrl:(NSString *) protocol host:(NSString*) host path:(NSString *) path queryParams:(NSDictionary*) queryParams{
-    
-    NSMutableString * result = [[NSMutableString alloc] initWithFormat:@"%@%@%@" , protocol , host , path];
-    if(nil != queryParams){
-        bool isFirst = true;
-        for(id key in queryParams){
-            if(!isFirst){
-                [result appendString:@"&"];
-            }
-            else{
-                [result appendString:@"?"];
-                isFirst = false;
-            }
-            
-            [result appendFormat:@"%@=%@", key , [[queryParams objectForKey:key] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-        }
-    }
-    
-    return result;
-}
+
 
 /**
  * 将pathParams中的value替换掉path中的动态参数
@@ -449,6 +420,31 @@
     
     return result;
 
+}
+
+/**
+ * 将pathParams中的value替换掉path中的动态参数
+ * 比如 path=/v2/getUserInfo/[userId]，pathParams 字典中包含 key:userId , value:10000003
+ * 替换后path会变成/v2/getUserInfo/10000003
+ */
++(NSString *) combineParams:(NSDictionary *) params{
+    NSMutableString * result = [[NSMutableString alloc] init];
+    if(nil != params){
+        bool isFirst = true;
+        for(id key in params){
+            if(!isFirst){
+                [result appendString:@"&"];
+            }
+            else{
+                isFirst = false;
+            }
+            
+            [result appendFormat:@"%@=%@", key , [[params objectForKey:key] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+        }
+    }
+    
+    return result;
+    
 }
 
 /**
