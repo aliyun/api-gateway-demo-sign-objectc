@@ -335,6 +335,7 @@
     //设置请求头中的时间戳
     NSDate * current = [NSDate date];
     NSDateFormatter * df = [[NSDateFormatter alloc] init ];
+    df.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     [df setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss z"];
     [headerParams setObject:[df stringFromDate:current] forKey:CLOUDAPI_HTTP_HEADER_DATE];
     
