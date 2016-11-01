@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Send Request View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="SendRequestViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="httpGetSendButton" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Ok-5V-JXM">
+                                <frame key="frameInset" minY="86" width="375" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.84308987855911255" green="0.84709924459457397" blue="0.84695142507553101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="16"/>
+                                <state key="normal" title="Send Http Get Request">
+                                    <color key="titleColor" red="0.14508149027824402" green="0.14510864019393921" blue="0.14507558941841125" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="SendGetRequestAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="648-y7-ZZ2"/>
+                                    <segue destination="EuX-ct-zwc" kind="show" identifier="getResultSegue" id="aEF-OM-uVx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YN6-aX-dDv">
+                                <frame key="frameInset" minY="150" width="375" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.84308987859999995" green="0.84709924459999997" blue="0.84695142509999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Send Http Post Form Request">
+                                    <color key="titleColor" red="0.14507749676704407" green="0.1451098620891571" blue="0.14507544040679932" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="SendPostFormRequestAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="M3q-Ld-a0I"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rSC-W5-OOe">
+                                <frame key="frameInset" minY="215" width="375" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.84294033050537109" green="0.84712785482406616" blue="0.84700316190719604" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Send Http Post Bytes Request">
+                                    <color key="titleColor" red="0.14507749680000001" green="0.14510986209999999" blue="0.14507544040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="SendPostBytesRequestAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="b4s-wt-ebi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g32-np-sql">
+                                <frame key="frameInset" minY="280" width="375" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.84294033049999995" green="0.84712785479999997" blue="0.84700316190000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Send Http Put Bytes Request">
+                                    <color key="titleColor" red="0.14507749680000001" green="0.14510986209999999" blue="0.14507544040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="SendPutBytesRequestAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="aRB-bg-UKa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oy9-2r-Vp8">
+                                <frame key="frameInset" minY="344" width="375" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.84294033049999995" green="0.84712785479999997" blue="0.84700316190000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Send Http Delete Request">
+                                    <color key="titleColor" red="0.14507749680000001" green="0.14510986209999999" blue="0.14507544040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="SendDeleteRequestAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="SsU-uc-dMp"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Aliyun CloudApi ObjectC Sdk" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Hm-EW-Hwt">
+                                <frame key="frameInset" minY="20" width="375" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.25403180718421936" green="0.31264060735702515" blue="0.72141903638839722" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="SendDeleteRequestBtn" destination="oy9-2r-Vp8" id="29B-yi-gF4"/>
+                        <outlet property="SendGetRequestBtn" destination="6Ok-5V-JXM" id="Cvx-H6-iui"/>
+                        <outlet property="SendPostBytesRequestBtn" destination="rSC-W5-OOe" id="U5Y-1d-ggj"/>
+                        <outlet property="SendPostFormRequestBtn" destination="YN6-aX-dDv" id="N2V-He-4on"/>
+                        <outlet property="SendPutBytesRequestBtn" destination="g32-np-sql" id="YTr-31-zGm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="116" y="119.1904047976012"/>
+        </scene>
+        <!--Show Result View Controller-->
+        <scene sceneID="ePf-DZ-LO2">
+            <objects>
+                <viewController id="EuX-ct-zwc" customClass="ShowResultViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="KWV-pz-TNr"/>
+                        <viewControllerLayoutGuide type="bottom" id="zgD-j9-bsn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FO4-4I-Kof">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Loading..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bx7-98-ZQN">
+                                <frame key="frameInset" minX="28" minY="71" width="323" height="576"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ee6-Mc-sio">
+                                <frame key="frameInset" minY="20" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.25390863418579102" green="0.31264907121658325" blue="0.72053617238998413" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textAttributes key="titleTextAttributes">
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </textAttributes>
+                                <items>
+                                    <navigationItem title="Result" id="2co-01-dQx">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="reply" id="IBz-jL-2B7">
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" id="N47-YB-JQB"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="resultText" destination="bx7-98-ZQN" id="Qde-bp-487"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="N5i-nm-hcF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="841" y="119"/>
+        </scene>
+    </scenes>
+</document>
