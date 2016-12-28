@@ -174,7 +174,11 @@
                 isFirst = false;
             }
             id key = [sortedKeys objectAtIndex:i];
-            [result appendFormat:@"%@=%@" , key , [parameters objectForKey:key]];
+            [result appendString:key];
+            
+            NSString* value = [parameters objectForKey:key];
+            if(nil !=  value && [NSNull null] != (NSNull *)value && [value length] > 0 )
+            [result appendFormat:@"=%@" , value];
             
         }
         
