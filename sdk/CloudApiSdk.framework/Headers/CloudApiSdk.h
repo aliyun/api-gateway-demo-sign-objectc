@@ -16,9 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-
 #import <Foundation/Foundation.h>
-#import "CommonCrypto/CommonDigest.h"
 #import "AppConfiguration.h"
 
 
@@ -159,6 +157,49 @@
 
 
 
+/**
+ *
+ * 以PUT的方法发送HTTP请求
+ * 请求Body为Byte数组
+ *
+ * @param httpSchema
+ * 使用HTTP还是HTTPS调用，请传入HttpConstant中的CLOUDAPI_HTTP或者CLOUDAPI_HTTPS
+ *
+ * @param host
+ * 请传入主机域名或者ip比如："alibaba.com:8080"
+ * 请务必注意不需要填写http://,也不需要在8080后传入"/",以下写法都是错误的：
+ * http://alibaba.com,alibaba.com/
+ *
+ * @param path
+ * 类似：/v2/getUserInfo/[userId]
+ *
+ * @param pathParams
+ * Api定义中的path参数键值对，SDK会将本字典中的value替换掉path中的动态参数
+ * 比如 path=/v2/getUserInfo/[userId]，pathParams 字典中包含 key:userId , value:10000003
+ * 发送的请求中的path会变成/v2/getUserInfo/10000003
+ *
+ * @param queryParams
+ * Api定义中的query参数键值对
+ * SDK会将字典中的所有键值对拼接到path后，比如path=/v2/getUserInfo/10000003 ，半参数包含key:sex , value:boy
+ * 发送的请求中的path会变成/v2/getUserInfo/10000003?sex=boy
+ *
+ * @param headerParams
+ * Api定义中的header参数键值对
+ *
+ * @param body
+ * 在body中传输的byte数组
+ *
+ * @param completionBlock 回调函数
+ */
+-(void)      httpPut:(NSString *) httpSchema
+                host:(NSString *) host
+                path:(NSString *) path
+          pathParams:(NSDictionary *) pathParams
+         queryParams:(NSDictionary*) queryParams
+          formParams:(NSDictionary *) formParams
+        headerParams:(NSMutableDictionary*) headerParams
+     completionBlock:(void (^)(NSData * , NSURLResponse * , NSError *))completionBlock;
+
 
 /**
  *
@@ -203,6 +244,93 @@
         headerParams:(NSMutableDictionary*) headerParams
      completionBlock:(void (^)(NSData * , NSURLResponse * , NSError *))completionBlock;
 
+
+/**
+ *
+ * 以PUT的方法发送HTTP请求
+ * 请求Body为Byte数组
+ *
+ * @param httpSchema
+ * 使用HTTP还是HTTPS调用，请传入HttpConstant中的CLOUDAPI_HTTP或者CLOUDAPI_HTTPS
+ *
+ * @param host
+ * 请传入主机域名或者ip比如："alibaba.com:8080"
+ * 请务必注意不需要填写http://,也不需要在8080后传入"/",以下写法都是错误的：
+ * http://alibaba.com,alibaba.com/
+ *
+ * @param path
+ * 类似：/v2/getUserInfo/[userId]
+ *
+ * @param pathParams
+ * Api定义中的path参数键值对，SDK会将本字典中的value替换掉path中的动态参数
+ * 比如 path=/v2/getUserInfo/[userId]，pathParams 字典中包含 key:userId , value:10000003
+ * 发送的请求中的path会变成/v2/getUserInfo/10000003
+ *
+ * @param queryParams
+ * Api定义中的query参数键值对
+ * SDK会将字典中的所有键值对拼接到path后，比如path=/v2/getUserInfo/10000003 ，半参数包含key:sex , value:boy
+ * 发送的请求中的path会变成/v2/getUserInfo/10000003?sex=boy
+ *
+ * @param headerParams
+ * Api定义中的header参数键值对
+ *
+ * @param body
+ * 在body中传输的byte数组
+ *
+ * @param completionBlock 回调函数
+ */
+-(void)    httpPatch:(NSString *) httpSchema
+                host:(NSString *) host
+                path:(NSString *) path
+          pathParams:(NSDictionary *) pathParams
+         queryParams:(NSDictionary*) queryParams
+          formParams:(NSDictionary *) formParams
+        headerParams:(NSMutableDictionary*) headerParams
+     completionBlock:(void (^)(NSData * , NSURLResponse * , NSError *))completionBlock;
+
+
+/**
+ *
+ * 以PUT的方法发送HTTP请求
+ * 请求Body为Byte数组
+ *
+ * @param httpSchema
+ * 使用HTTP还是HTTPS调用，请传入HttpConstant中的CLOUDAPI_HTTP或者CLOUDAPI_HTTPS
+ *
+ * @param host
+ * 请传入主机域名或者ip比如："alibaba.com:8080"
+ * 请务必注意不需要填写http://,也不需要在8080后传入"/",以下写法都是错误的：
+ * http://alibaba.com,alibaba.com/
+ *
+ * @param path
+ * 类似：/v2/getUserInfo/[userId]
+ *
+ * @param pathParams
+ * Api定义中的path参数键值对，SDK会将本字典中的value替换掉path中的动态参数
+ * 比如 path=/v2/getUserInfo/[userId]，pathParams 字典中包含 key:userId , value:10000003
+ * 发送的请求中的path会变成/v2/getUserInfo/10000003
+ *
+ * @param queryParams
+ * Api定义中的query参数键值对
+ * SDK会将字典中的所有键值对拼接到path后，比如path=/v2/getUserInfo/10000003 ，半参数包含key:sex , value:boy
+ * 发送的请求中的path会变成/v2/getUserInfo/10000003?sex=boy
+ *
+ * @param headerParams
+ * Api定义中的header参数键值对
+ *
+ * @param body
+ * 在body中传输的byte数组
+ *
+ * @param completionBlock 回调函数
+ */
+-(void)    httpPatch:(NSString *) httpSchema
+                host:(NSString *) host
+                path:(NSString *) path
+          pathParams:(NSDictionary *) pathParams
+         queryParams:(NSDictionary*) queryParams
+                body:(NSData *)  body
+        headerParams:(NSMutableDictionary*) headerParams
+     completionBlock:(void (^)(NSData * , NSURLResponse * , NSError *))completionBlock;
 
 
 /**
@@ -282,16 +410,16 @@
  * 在body中传输的byte数组
  */
 + (NSURLRequest *) buildRequest:(NSString *) protocol
-                         method:(NSString*) method
-                           host:(NSString*) host
-                           path:(NSString*) path
-                     pathParams:(NSDictionary *) pathParams
-                    queryParams:(NSDictionary*) queryParams
-                     formParams:(NSDictionary *) formParams
-                           body:(NSData *) body
-             requestContentType:(NSString *) requestContentType
-              acceptContentType:(NSString *) acceptContentType
-                   headerParams:(NSMutableDictionary*) headerParams;
+method:(NSString*) method
+host:(NSString*) host
+path:(NSString*) path
+pathParams:(NSDictionary *) pathParams
+queryParams:(NSDictionary*) queryParams
+formParams:(NSDictionary *) formParams
+body:(NSData *) body
+requestContentType:(NSString *) requestContentType
+acceptContentType:(NSString *) acceptContentType
+headerParams:(NSMutableDictionary*) headerParams;
 
 /**
  *  拼接参数串

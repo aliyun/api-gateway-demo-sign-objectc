@@ -43,6 +43,9 @@ static NSString* const CLOUDAPI_POST = @"POST";
 //PUT
 static NSString* const CLOUDAPI_PUT = @"PUT";
 
+//PATCH
+static NSString* const CLOUDAPI_PATCH = @"PATCH";
+
 //DELETE
 static NSString* const CLOUDAPI_DELETE = @"DELETE";
 
