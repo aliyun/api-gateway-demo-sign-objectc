@@ -1,4 +1,1 @@
-# Api-Gateway-Demo-ObjectC
-
-- src:SDK源码
-- sdk:SDK及调用Demo
+# 请去官网下载最新版本，谢谢
